@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       ),
       themeMode: _themeMode,
       home: MyHomePage(
-        title: 'Material 3 Demo',
+        title: 'Calculadora de IMC',
         useLightMode: useLightMode,
         handleBrightnessChange: (useLightMode) => setState(() {
           _themeMode = useLightMode ? ThemeMode.light : ThemeMode.dark;
@@ -82,6 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        centerTitle: true,
         actions: <Widget>[
           _BrightnessButton(
             handleBrightnessChange: widget.handleBrightnessChange,
@@ -89,18 +91,49 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Calculadora de ICM',
+                style:
+                    Theme.of(context).textTheme.bodyLarge, // verificar depois
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: 'PESO ',
+                      hintText: 'Digite seu Peso',
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10))))),
+              const SizedBox(height: 16),
+              TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: 'ALTURA ',
+                      hintText: 'Digite sua Altura',
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10))))),
+              const SizedBox(
+                height: 16,
+              ),
+              Container(
+                width: 150,
+                child: ElevatedButton(
+                    onPressed: () {
+                      print('Clique aqui');
+                    },
+                    child: const Text('CALCULAR')),
+              )
+              /*Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),*/
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.large(
